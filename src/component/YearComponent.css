@@ -1,4 +1,4 @@
-.Home {
+.Year {
     font-size: 1.0em;
     width: auto;
     background-color: rgba(35, 62, 78, 0.726);
@@ -6,7 +6,7 @@
     color: #fff;
 }
 
-.Home ul {
+.Year ul {
     list-style-type:none;
     overflow-x: auto;
     margin: 0 auto;
@@ -14,21 +14,23 @@
     display: flex;
 }
 
-.Home ul li {
+.Year ul li {
     padding: 10px;
     width: 100%;
     margin-left: 10px;
+    cursor: pointer;
 }
 
-.Home a {
+.Year ul li a {
     text-decoration: none;
     color: #fff;
 }
 
-.Home a:active {
+.Year ul li:active {
     color: #fff;
 }
 
-.Home a:hover{
-    color: #5e4bca;
+.Year ul li:hover{
+    color: #63d1c2fa;
+    font-style: bold;
 }
