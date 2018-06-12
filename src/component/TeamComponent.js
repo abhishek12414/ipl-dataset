@@ -1,44 +1,28 @@
 import React, { Component } from "react";
-import './TeamComponent.css'
+import './TeamComponent.css';
+import getJson from './fetchAPI'
 
 class Team extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoaded: false,
-            teams: []
-        }
+    state = {
+        teams: []
     }
 
-    getTeams(year) {
-        fetch(`http://127.0.0.1:8082/api/${year}`).then(res => {
-            return res.json();
-        }).then(parsedJSON => {
-            this.setState({
-                isLoaded: true,
-                teams: parsedJSON
-            });
-        }).catch(err => {
-            console.log(err);
+    componentWillReceiveProps(nextProps) {
+        getJson(`http://127.0.0.1:8082/api/${nextProps.year}`).then(teams => {
+            this.setState({ teams: teams });
         })
     }
 
-    componentWillReceiveProps(nextProps){
-        this.getTeams(nextProps.year)
-
-    }
-
     render() {
-        const {isLoaded, teams} = this.state;
+
+        const { teams } = this.state;
+
         return (
-            <div className="Team">
-                {
-                    (isLoaded && teams.length > 0) ? teams.map(team=> {
-                        return <div>{team}</div>
-                    }) : null
-                }
-            </div>
+            (teams.length > 0) ?
+                <div className="Team">
+                    {teams.map(team => { return <div onClick={()=>this.props.teamName(team)}>{team}</div> })}
+                </div> : null
         );
     }
 }

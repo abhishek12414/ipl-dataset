@@ -1,0 +1,15 @@
+.Player {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    list-style: none;
+    grid-gap: 1em; 
+}
+
+.Player div {
+    background: #c3dbd6c4;
+    padding: 5%;
+    margin: 10px;
+    box-shadow: 0 2px 3px #83c2df;
+    cursor: pointer;
+}

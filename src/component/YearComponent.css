@@ -27,10 +27,12 @@
 }
 
 .Year ul li:active {
-    color: #fff;
+    color: rgb(173, 48, 48);
+    background: rgb(77, 10, 10);
 }
 
-.Year ul li:hover{
+
+.Year ul li:hover {
     color: #63d1c2fa;
     font-style: bold;
 }

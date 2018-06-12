@@ -2,47 +2,58 @@ import React, { Component, Fragment } from 'react';
 import Nav from './component/NavComponent';
 import Year from './component/YearComponent';
 import Team from './component/TeamComponent';
+import Player from './component/PlayerComponent'
+import getJson from './component/fetchAPI';
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            years: [],
-            isLoaded: false,
-            selectedYear: null,
-        }
+    state = {
+        years: [],
+        selectedYear: null,
+        selectedTeam: null
     }
 
     componentWillMount() {
-        this.getData();
+        getJson(`http://127.0.0.1:8082/api/`).then(years => {
+            console.log(years)
+            this.setState({ years: years });
+        })
+
     }
 
-    getData(){
-        fetch('http://127.0.0.1:8082/api/')
-        .then(res=>{return res.json();})
-        .then(parsedJSON => {
-            this.setState({            
-                years: parsedJSON,
-                isLoaded: true
-            })
-        }).catch(error =>{
-            console.log(error);
+    setYear(result) {
+        this.setState({
+            selectedYear: result.year,
+            selectedTeam: null
+        })
+    }
+
+    setTeam(teamName) {
+        this.setState({
+            selectedTeam: teamName
         });
     }
 
-    setYear(result){
-        this.setState({
-            selectedYear: result.year
-        })
-    }
-    
     render() {
+
+        const { years, selectedTeam } = this.state;
+
         return (
             <Fragment>
                 <Nav />
-                <Year getYear = {this.setYear.bind(this)} years={this.state.years} />
-                <Team year={this.state.selectedYear}/>
+                <Year getYear={this.setYear.bind(this)} years={this.state.years} />
+                                
+                {
+                    (years) 
+                    ? < Team teamName={this.setTeam.bind(this)} year={this.state.selectedYear} />
+                    : null
+                }
+                {
+                    (years.length > 0 && selectedTeam != null)
+                        ? <Player year={this.state.selectedYear} teamName={this.state.selectedTeam} />
+                        : null
+                }
+
             </Fragment>
         );
     }
