@@ -19,18 +19,17 @@
     width: 100%;
     margin-left: 10px;
     cursor: pointer;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .Year ul li a {
     text-decoration: none;
     color: #fff;
 }
-
-.Year ul li:active {
-    color: rgb(173, 48, 48);
-    background: rgb(77, 10, 10);
-}
-
 
 .Year ul li:hover {
     color: #63d1c2fa;

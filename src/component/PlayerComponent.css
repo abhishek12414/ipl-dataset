@@ -13,3 +13,16 @@
     box-shadow: 0 2px 3px #83c2df;
     cursor: pointer;
 }
+
+.active {
+    background: #2339b4c4;
+}
+
+.divPlayer {
+    text-align: center;
+    margin: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    color: rgba(82, 139, 192, 0.959);
+    text-shadow: 2px 2px #80ddb685;
+}

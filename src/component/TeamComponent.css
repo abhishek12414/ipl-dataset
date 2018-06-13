@@ -18,3 +18,24 @@
     font-size: 1.02em;
     cursor: pointer;
 }
+
+.Team div {
+    background: #ffffffc4;
+    /* border: 1px solid; */
+    /* border-radius: 10px; */
+    padding: 5%;
+    margin: 10px;
+    box-shadow: 0 2px 3px #a2a2e2;
+    text-align: center;
+    font-size: 1.02em;
+    cursor: pointer;
+}
+
+.divYear {
+    text-align: center;
+    margin: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    color: rgba(192, 144, 82, 0.959);
+    text-shadow: 2px 2px #80ddb685;
+}

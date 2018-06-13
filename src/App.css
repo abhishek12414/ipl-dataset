@@ -1,3 +1,24 @@
 .divSize{
     display: inline-flex;
 }
+
+.playedMatches {
+    display: grid;
+    flex-direction: column;
+    padding: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    justify-content: space-around;
+    grid-gap: .5em;
+} 
+
+.playedMatches div{
+    background: #dfdfe9;
+    /* border: 1px solid; */
+    /* border-radius: 10px; */
+    padding: 5%;
+    margin: 10px;
+    box-shadow: 0 2px 3px #4a4a57;
+    text-align: center;
+    font-size: 1.02em;
+    cursor: default;
+}

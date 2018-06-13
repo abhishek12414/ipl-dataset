@@ -5,6 +5,8 @@ import './PlayerComponent.css'
 class Player extends Component {
     
     state = {
+        year: null,
+        team: null,
         players: []
     }
 
@@ -19,18 +21,22 @@ class Player extends Component {
     fetchPlayerData(year, teamName) {
         getJson(`http://127.0.0.1:8082/api/${year}/${teamName}`)
             .then(players => {
-                this.setState({ players: players })
+                this.setState({ year: year, team: teamName, players: players })
             })
     }
 
     render() {
+        const { year, team, players } = this.state;
         return (
-            <div className="Player">
-                {
-                    this.state.players.map(player => {
-                        return <div>{player}</div>
-                    })
-                }
+            <div>
+                <div className="divPlayer"> Players of { team } ({year})</div> 
+                <div className="Player">
+                    {
+                        players.map((player, index)=> {
+                            return <div key={index}>{player}</div>
+                        })
+                    }
+                </div>
             </div>
         );
     }

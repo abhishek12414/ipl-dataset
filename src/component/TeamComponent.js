@@ -5,24 +5,31 @@ import getJson from './fetchAPI'
 class Team extends Component {
 
     state = {
+        year: null,
         teams: []
     }
 
     componentWillReceiveProps(nextProps) {
         getJson(`http://127.0.0.1:8082/api/${nextProps.year}`).then(teams => {
-            this.setState({ teams: teams });
+            this.setState({ year: nextProps.year, teams: teams });
         })
     }
 
     render() {
 
-        const { teams } = this.state;
+        const { year, teams } = this.state;
 
         return (
             (teams.length > 0) ?
-                <div className="Team">
-                    {teams.map(team => { return <div onClick={()=>this.props.teamName(team)}>{team}</div> })}
-                </div> : null
+                <div>
+                    <div className="divYear">{year}</div>
+                    <div className="Team">
+                        {teams.map(team => {
+                            return <div onClick={() => this.props.teamName(team.team)}>
+                                {(team.team) ? team.team : "No Result"}  
+                                (<strong>{team.totalWon}</strong>)</div> })}
+                                </div></div> : null
+
         );
     }
 }

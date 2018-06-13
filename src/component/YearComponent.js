@@ -4,6 +4,7 @@ import './YearComponent.css';
 class Year extends Component {
 
     render() {
+        console.log(this.props.years)
         const years = this.props.years;
         return (
             <div className="Year">
