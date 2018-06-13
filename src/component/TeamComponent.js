@@ -24,8 +24,8 @@ class Team extends Component {
                 <div>
                     <div className="divYear">{year}</div>
                     <div className="Team">
-                        {teams.map(team => {
-                            return <div onClick={() => this.props.teamName(team.team)}>
+                        {teams.map((team, index) => {
+                            return <div key={index} onClick={() => this.props.teamName(team.team)}>
                                 {(team.team) ? team.team : "No Result"}  
                                 (<strong>{team.totalWon}</strong>)</div> })}
                                 </div></div> : null

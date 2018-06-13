@@ -3,7 +3,7 @@ import getJson from './fetchAPI';
 import './PlayerComponent.css'
 
 class Player extends Component {
-    
+
     state = {
         year: null,
         team: null,
@@ -15,29 +15,35 @@ class Player extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.fetchPlayerData(nextProps.year, nextProps.teamName);        
+        this.fetchPlayerData(nextProps.year, nextProps.teamName);
     }
 
     fetchPlayerData(year, teamName) {
-        getJson(`http://127.0.0.1:8082/api/${year}/${teamName}`)
-            .then(players => {
-                this.setState({ year: year, team: teamName, players: players })
-            })
+        if (teamName) {
+            getJson(`http://127.0.0.1:8082/api/${year}/${teamName}`)
+                .then(players => {
+                    this.setState({ year: year, team: teamName, players: players })
+                })
+        } else {
+            this.setState({players : []})
+        }
     }
 
     render() {
         const { year, team, players } = this.state;
         return (
+            (players.length > 0) ?
             <div>
-                <div className="divPlayer"> Players of { team } ({year})</div> 
+                <div className="divPlayer"> Players of {team} ({year})</div>
                 <div className="Player">
                     {
-                        players.map((player, index)=> {
+                        players.map((player, index) => {
                             return <div key={index}>{player}</div>
                         })
                     }
                 </div>
             </div>
+            : null
         );
     }
 }

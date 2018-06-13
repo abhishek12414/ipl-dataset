@@ -45,8 +45,8 @@ class App extends Component {
         if (!this.state.selectedYear) {
             plotWins = (
                 <div className="playedMatches">
-                    {   years.map(year => {
-                            return <div> <strong>{year.year}</strong> : <i>{year.matches}</i></div>
+                    {   years.map((year, index) => {
+                            return <div key={index}> <strong>{year.year}</strong> : <i>{year.matches}</i></div>
                         })
                     }
                 </div>)
@@ -68,7 +68,7 @@ class App extends Component {
                         : null
                 }
                 {
-                    (years.length > 0 && selectedTeam != null)
+                    (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result')
                         ? <Player year={this.state.selectedYear} teamName={this.state.selectedTeam} />
                         : null
                 }
