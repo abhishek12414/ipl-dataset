@@ -31,6 +31,7 @@ class Player extends Component {
 
     render() {
         const { year, team, players } = this.state;
+
         return (
             (players.length > 0) ?
             <div>
@@ -38,7 +39,7 @@ class Player extends Component {
                 <div className="Player">
                     {
                         players.map((player, index) => {
-                            return <div key={index}>{player}</div>
+                            return <div onClick={()=>this.props.onPlayerClicked({player})} key={index}>{player}</div>
                         })
                     }
                 </div>

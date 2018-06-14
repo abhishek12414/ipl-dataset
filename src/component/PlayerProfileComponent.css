@@ -1,0 +1,36 @@
+.PlayerProfile {
+    margin-top: 20px;
+    background: rgb(236, 232, 172);
+    box-shadow: 4px 5px 5px rgb(201, 195, 195);
+    padding: 20px;
+    margin: 0 auto;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.PlayerProfile h1 {
+    font-family: 'sans-serif';
+    text-align: center;
+}
+
+.PlayerProfile hr {
+    width: 100%;
+}
+
+.PlayerProfile .stats {
+    display: grid;
+}
+
+.PlayerProfile .stats p {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 10px;
+    padding-left: 20px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 3px rgb(236, 156, 156);
+}
+
+
+.PlayerProfile .stats p span {
+    padding: 3px;
+}

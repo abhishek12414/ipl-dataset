@@ -3,6 +3,7 @@ import Nav from './component/NavComponent';
 import Year from './component/YearComponent';
 import Team from './component/TeamComponent';
 import Player from './component/PlayerComponent'
+import PlayerProfile from './component/PlayerProfileComponent'
 import getJson from './component/fetchAPI';
 import './App.css';
 
@@ -11,35 +12,40 @@ class App extends Component {
     state = {
         years: [],
         selectedYear: null,
-        selectedTeam: null
+        selectedTeam: null,
+        selectedPlayer: null
     }
 
     componentWillMount() {
         getJson(`http://127.0.0.1:8082/api/`).then(years => {
             this.setState({ years: years });
         })
-
     }
 
     setYear(result) {
         this.setState({
             selectedYear: result.year,
-            selectedTeam: null
+            selectedTeam: null,
+            selectedPlayer: null
         })
     }
 
     setTeam(teamName) {
         this.setState({
-            selectedTeam: teamName
+            selectedTeam: teamName,
+            selectedPlayer: null
         });
     }
 
-
+    setPlayer(playerName) {
+        this.setState({
+            selectedPlayer: playerName.player
+        });
+    }
 
     render() {
 
-        const { years, selectedTeam } = this.state;
-
+        const { years, selectedYear, selectedTeam, selectedPlayer } = this.state;
 
         let plotWins = null;
         if (!this.state.selectedYear) {
@@ -64,15 +70,20 @@ class App extends Component {
                 {plotWins}
                 {
                     (years)
-                        ? < Team teamName={this.setTeam.bind(this)} year={this.state.selectedYear} />
+                        ? < Team teamName={this.setTeam.bind(this)} year={selectedYear} />
                         : null
                 }
                 {
                     (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result')
-                        ? <Player year={this.state.selectedYear} teamName={this.state.selectedTeam} />
+                        ? <Player onPlayerClicked={this.setPlayer.bind(this)} year={selectedYear} teamName={selectedTeam} />
                         : null
                 }
 
+                {
+                    (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result' && selectedPlayer !== null)?
+                    <PlayerProfile info={[ selectedYear, selectedTeam, selectedPlayer] }/> : null
+                }
+                
             </Fragment>
         );
     }
