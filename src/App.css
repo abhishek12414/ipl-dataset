@@ -1,3 +1,7 @@
+.divPlayerProfileContainer{
+    text-align: center;
+}
+
 .divSize{
     display: inline-flex;
 }
@@ -21,4 +25,9 @@
     text-align: center;
     font-size: 1.02em;
     cursor: default;
+}
+
+.playerContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }

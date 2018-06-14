@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import Nav from './component/NavComponent';
-import Year from './component/YearComponent';
-import Team from './component/TeamComponent';
-import Player from './component/PlayerComponent'
-import PlayerProfile from './component/PlayerProfileComponent'
-import getJson from './component/fetchAPI';
+import Nav from './component/Nav';
+import Year from './component/Years';
+import Team from './component/Teams';
+import Player from './component/Players';
+import PlayerProfile from './component/PlayerProfile';
+import getJson from './fetchAPI';
 import './App.css';
 
 class App extends Component {
@@ -51,9 +51,9 @@ class App extends Component {
         if (!this.state.selectedYear) {
             plotWins = (
                 <div className="playedMatches">
-                    {   years.map((year, index) => {
-                            return <div key={index}> <strong>{year.year}</strong> : <i>{year.matches}</i></div>
-                        })
+                    {years.map((year, index) => {
+                        return <div key={index}> <strong>{year.year}</strong> : <i>{year.matches}</i></div>
+                    })
                     }
                 </div>)
         }
@@ -67,23 +67,27 @@ class App extends Component {
                 <Nav />
 
                 <Year getYear={this.setYear.bind(this)} years={playedYears} />
+
                 {plotWins}
-                {
-                    (years)
-                        ? < Team teamName={this.setTeam.bind(this)} year={selectedYear} />
-                        : null
-                }
-                {
-                    (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result')
-                        ? <Player onPlayerClicked={this.setPlayer.bind(this)} year={selectedYear} teamName={selectedTeam} />
-                        : null
-                }
 
                 {
-                    (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result' && selectedPlayer !== null)?
-                    <PlayerProfile info={[ selectedYear, selectedTeam, selectedPlayer] }/> : null
+                    (years)
+                        ? < Team setTeamName={this.setTeam.bind(this)} year={selectedYear} />
+                        : null
                 }
-                
+                <div className="playerContainer">
+                    {
+                        (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result')
+                            ? <Player onPlayerClicked={this.setPlayer.bind(this)} year={selectedYear} teamName={selectedTeam} />
+                            : null
+                    }
+
+                    {
+                        (years.length > 0 && selectedTeam !== null && selectedTeam !== 'No Result' && selectedPlayer !== null)
+                            ? <PlayerProfile info={[selectedYear, selectedTeam, selectedPlayer]} />
+                            : null
+                    }
+                </div>
             </Fragment>
         );
     }
